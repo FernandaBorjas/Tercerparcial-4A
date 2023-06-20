@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"&quot; integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="style1.css">
+    <title>Movies API</title>
+</head>
+<body style="background-color: #f0f0c8;">
+            <div style="margin: 24px;">
+                <nav class="navbar navbar-inverse navbar-stick-static-top" style="background-color:#1468e6;">>
+                    <div class="container">
+                        <a class="navbar-brand" href="index.html">Inicio</a>
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a href="cuestionario.html">Cuestionario</a>
+                            </li>
+                            <li>
+                                <a href="calculadora.html">Calculadora</a>
+                            </li>
+                            <li>
+                                <a href="perfil.html">Perfil</a>
+                            </li>
+                            <li>
+                                <a href="fisica.html">Fisica</a>
+                            </li>
+                            <li>
+                                <a href="aizawa.html">Perfil</a>
+                            </li>
+                            <li>
+                                <a href="movies.html">Movies</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+<div style="margin:24px;">
+<div class="quiz-container" id="quiz">
+    <div class="quiz-header">
+        <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGgbWAx5SrB1G6hm94yDrJ1XiLczr1uZePjPgRbIy_WBWXzTO7xSn-4iozzpXtfiUFkI0&usqp=CAU" alt="imagen" id="question-image" id="question-image" style="width:250px; height: auto;">
+        </div>
+<h2 id="question">¿Anime donde sale un emo vengativo y un rubio?</h2>
+<ul>
+    <li>
+        <input type="radio" name="answer" id="a" class="answer">
+        <label for="a" id="a_text">Naruto</label>
+    </li>
+    <li>
+        <input type="radio" name="answer" id="b" class="answer">
+        <label for="b" id="b_text">Shingeki No Kyojin</label>
+    </li>
+    <li>
+        <input type="radio" name="answer" id="c" class="answer">
+        <label for="c" id="c_text">Tokyo Ghoul</label>
+    </li>
+    <li>
+        <input type="radio" name="answer" id="d" class="answer">
+        <label for="d" id="d_text">My Hero Academia</label>
+    </li>
+</ul>
+</div>
+<button id="submit">Siguiente</button>
+</div>
+
+</div>
+
+<style>
+    body{
+        align-items: center;
+        justify-content: center;
+        overflow: 0;
+        margin: 0;
+    }
+    .quiz-container{
+        background-color: rgba(162, 116, 177, 0.637);
+        background-image: linear-gradient(315deg,#b8c6db 0%,#f5f7fa 100%);
+        border-radius: 10px;
+        box-shadow: 0 0 20px 5px rgba(162, 116, 177, 0.637);
+        width: 400px;
+        overflow: hidden;
+    }
+    .quiz-header{
+        padding: 15px;
+    }
+    h2{
+        padding: 10px;
+        text-align: center;
+        margin: 0;
+    }
+    ul{
+        list-style: none;
+        padding: 0;
+    }
+    ul li{
+        font-size: 18px;
+        margin: 10px 0;
+    }
+    ul li label{
+        cursor: pointer;
+    }
+    button{
+        background-color: #b8c6db;
+        color: black;
+        border: none;
+        display: block;
+        width: 100%;
+        cursor:pointer;
+        font-size: 20px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        padding: 20px;
+    }
+    button:hover{
+        background-color: #1468e6;
+    }
+    button:focus{
+        outline: none;
+        background-color: #fdff8f;
+    }
+
+</style>
+<script>
+    const quizData = [
+        {
+            question:"¿Anime donde sale un emo vengativo y un rubio?",
+            Image:"quiz1.jpg",
+            a:"Naruto",
+            b:"Shingeki No Kyojin",
+            c:"Tokyo Ghoul",
+            d:"My hero Academia",
+            correct:"a"
+        },
+    ];
+    const quiz = document.getElementById('quiz');
+    const answerEls = document.querySelectorAll('.answer')
+    const questionEl = document.getElementById('question')
+    const submitBtn = document.getElementById('submit')
+
+    const a_text = document.getElementById('a_text');
+    const b_text = document.getElementById('b_text');
+    const c_text = document.getElementById('c_text');
+    const d_text = document.getElementById('d_text');
+
+    let currentQuiz = 0;
+    let score = 0;
+    loadQuiz();
+
+    function loadQuiz(){
+        deselectAnswer();
+        const currentQuiz = quizData[currentQuiz]
+        questionEl.innerText = currentQuizData.question;
+
+        a_text.innertext = currentQuiz.a;
+        b_text.innertext = currentQuiz.b;
+        c_text.innertext = currentQuiz.c;
+        d_text.innertext = currentQuiz.d;
+
+        const questionImage = document.getElementById('question-image');
+        questionImage.src = currentQuizData.image;
+    }
+    function getselectAnswer(){
+        answerEls.forEach(answerEl => answerEl)
+    }
+    function getSelected(){
+        let answer;
+        answerEls.forEach(answerEl=> {
+            if(answerEl.checked){
+                answer = answerEl.id;
+            }
+        });
+        return answer;
+    }
+    submitBtn.addEventListener('clic' ,() =>{
+        const answer = getSelected();
+        if(answer){
+            if(answer === quizData[currentQuiz].correct){
+                score++;
+            }
+            currentQuiz++;
+            if(currentQuiz < quizData.lenght){
+                loadQuiz();
+            } else {
+                quiz.innerHTML = `
+                <h2>Contestaste ${score}/${quizData.length}las preguntas correctamnente</h2>
+                <button onclick = "location.reload()">Volver</button>
+                `
+            }
+        }
+    })
+</script>
+<footer>
+
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section about">
+
+        
+   <h2> Contactame</h2>
+   <p> Si estas interesado en contactarme puedes hacerlo en cualquiera de las siguientes redes sociales:</p>
+
+    <div class="contact-links">
+        
+    
+   <a href="http://www.facebook.com/miperfil" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="http://www.instagram.com/miperfil" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="http://www.twitter.com/miperfil" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="http://www.discord.com/miperfil" target="_blank"><i class="fab fa-discord"></i></a>
+    <a href="http://www.pinterest.com/miperfil" target="_blank"><i class="fab fa-pinterest"></i></a>
+    <a href="http://www.youtube.com/miperfil" target="_blank"><i class="fab fa-youtube"></i></a>
+
+</footer>
